@@ -742,7 +742,7 @@
         <div class="carousel-inner">
             <!-- 科技工作者画面 -->
             <div class="carousel-item active">
-                <img src="https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="科技工作者">
+                <img src="https://q3.itc.cn/images01/20240508/849d10228e144baaab73de03bd84e8e1.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="科技工作者">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>拼搏奋发 一战上岸</h1>
                     <p>广大科技工作者攻坚克难，为十四五规划提供坚实科技支撑</p>
@@ -760,7 +760,7 @@
             </div>
             <!-- 综合发展画面 -->
             <div class="carousel-item">
-                <img src="https://images.pexels.com/photos/544269/pexels-photo-544269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="十四五发展成果">
+                <img src="[https://images.pexels.com/photos/544269/pexels-photo-544269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2](https://q1.itc.cn/images01/20240508/73f9f47767944d2bb07f0486c227edee.jpeg)" class="d-block w-100" alt="十四五发展成果">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>上岸大湾区 拼在当下</h1>
                     <p>经济发展、改革开放、民生改善取得历史性成就</p>

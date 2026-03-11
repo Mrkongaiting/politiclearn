@@ -1,10 +1,9 @@
-# 爱岗敬业，甘为铺路石、勇当大先生
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>十四五规划成果展示平台</title>
+    <title>十四五规划成果展示平台 | 教师编备考专题</title>
     <!-- 引入外部资源 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -13,6 +12,8 @@
     <!-- 新增3D效果库 -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.min.js"></script>
+    <!-- 新增滚动视差库 -->
+    <script src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
     
     <style>
         /* 全局3D效果增强 */
@@ -42,7 +43,7 @@
             z-index: -2;
         }
         
-        /* 3D背景装饰增强 */
+        /* 3D背景装饰增强 - 新增动态渐变+光影 */
         .bg-3d {
             position: fixed;
             top: 0;
@@ -55,8 +56,15 @@
                 radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.15) 0%, transparent 25%),
                 linear-gradient(135deg, #001224 0%, #00284d 50%, #004080 100%);
             transform-style: preserve-3d;
-            animation: bgRotate 25s infinite linear alternate;
+            animation: bgRotate 25s infinite linear alternate, bgColorShift 15s infinite ease-in-out alternate;
             backdrop-filter: blur(2px);
+            box-shadow: inset 0 0 200px rgba(0, 80, 160, 0.5);
+        }
+        
+        /* 新增背景颜色渐变动画 */
+        @keyframes bgColorShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         
         @keyframes bgRotate {
@@ -64,15 +72,21 @@
             100% { transform: rotateX(8deg) rotateY(8deg) translateZ(-50px); }
         }
         
-        /* 导航栏3D效果 */
+        /* 导航栏3D效果增强 - 新增悬浮光晕 */
         .navbar-3d {
             background: rgba(0, 20, 40, 0.85);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 193, 7, 0.2);
             transform-style: preserve-3d;
             transform: translateZ(50px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 193, 7, 0.1);
             z-index: 1000;
+            transition: all 0.5s ease;
+        }
+        
+        .navbar-3d.scrolled {
+            background: rgba(0, 20, 40, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.2);
         }
         
         .nav-link {
@@ -98,18 +112,32 @@
         .nav-link:hover {
             color: #ffc107 !important;
             transform: translateZ(10px) translateY(-2px);
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
         }
         
         .nav-link:hover::after {
             width: 100%;
         }
         
-        /* 轮播图3D效果增强 */
+        /* 轮播图3D效果增强 - 新增视差+光影 */
         .carousel-container {
             transform-style: preserve-3d;
             transform: perspective(2000px) rotateY(0deg);
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 70px;
+            position: relative;
+        }
+        
+        .carousel-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, #001224, transparent);
+            z-index: 5;
+            transform: translateZ(1px);
         }
         
         .carousel-container:hover {
@@ -181,12 +209,13 @@
             line-height: 1.6;
         }
         
-        /* 展馆通用3D样式增强 */
+        /* 展馆通用3D样式增强 - 新增滚动视差 */
         .museum-section {
             padding: 120px 0;
             min-height: 100vh;
             transform-style: preserve-3d;
             position: relative;
+            scroll-snap-align: start;
         }
         
         .museum-section::before {
@@ -229,15 +258,22 @@
             border-radius: 3px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
             transform: translateZ(1px);
+            animation: linePulse 3s infinite alternate;
         }
         
-        /* 3D卡片样式增强 */
+        /* 新增标题下划线脉冲动画 */
+        @keyframes linePulse {
+            0% { width: 120px; opacity: 0.8; }
+            100% { width: 180px; opacity: 1; }
+        }
+        
+        /* 3D卡片样式增强 - 新增GIF动图容器+光影分层 */
         .content-card {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 30px rgba(0, 80, 160, 0.1);
             padding: 50px;
             margin-bottom: 50px;
             transform-style: preserve-3d;
@@ -245,6 +281,24 @@
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+        }
+        
+        /* 新增卡片高光效果 */
+        .content-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: skewX(-20deg) translateX(100%);
+            transition: transform 1.5s ease;
+            z-index: 1;
+        }
+        
+        .content-card:hover::after {
+            transform: skewX(-20deg) translateX(-100%);
         }
         
         .content-card::before {
@@ -265,7 +319,7 @@
         
         .content-card:hover {
             transform: translateZ(50px) translateY(-20px) rotateX(8deg) rotateY(5deg);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 193, 7, 0.1);
             border-color: rgba(255, 193, 7, 0.3);
         }
         
@@ -288,7 +342,33 @@
             transform: translateZ(1px);
         }
         
-        /* 数字滚动3D效果 */
+        /* GIF动图容器增强 - 新增3D边框+悬浮缩放 */
+        .gif-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 35px;
+            transform-style: preserve-3d;
+            transform: translateZ(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+            border: 2px solid transparent;
+            background: linear-gradient(rgba(0,20,40,0.8), rgba(0,20,40,0.8)) padding-box,
+                        linear-gradient(135deg, #ffc107, #ff8c00, #007bff) border-box;
+            transition: all 0.8s ease;
+        }
+        
+        .gif-container:hover {
+            transform: translateZ(25px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 193, 7, 0.2);
+        }
+        
+        .gif-container img, .gif-container iframe {
+            width: 100%;
+            display: block;
+            transform: translateZ(5px);
+        }
+        
+        /* 数字滚动3D效果增强 */
         .counter-box {
             background: rgba(0, 20, 40, 0.5);
             border-radius: 15px;
@@ -298,6 +378,13 @@
             transform: translateZ(10px);
             border: 1px solid rgba(255, 193, 7, 0.2);
             text-align: center;
+            transition: all 0.5s ease;
+        }
+        
+        .counter-box:hover {
+            transform: translateZ(20px) scale(1.05);
+            border-color: rgba(255, 193, 7, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
         .counter-number {
@@ -307,6 +394,12 @@
             text-shadow: 0 0 15px rgba(255,193,7,0.4);
             margin-bottom: 10px;
             transform: translateZ(5px);
+            animation: numberGlow 2s infinite alternate;
+        }
+        
+        @keyframes numberGlow {
+            0% { text-shadow: 0 0 15px rgba(255,193,7,0.4); }
+            100% { text-shadow: 0 0 25px rgba(255,193,7,0.8); }
         }
         
         .counter-label {
@@ -315,21 +408,7 @@
             transform: translateZ(3px);
         }
         
-        /* 财富馆样式增强 */
-        .wealth-gif {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 35px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-            transform: translateZ(10px);
-            transition: transform 0.8s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .content-card:hover .wealth-gif {
-            transform: translateZ(25px) scale(1.05);
-        }
-        
+        /* 经济数据样式增强 */
         .economic-data {
             font-size: 1.25rem;
             line-height: 1.9;
@@ -344,6 +423,12 @@
             font-size: 1.5rem;
             text-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
             position: relative;
+            animation: highlightPulse 2s infinite alternate;
+        }
+        
+        @keyframes highlightPulse {
+            0% { text-shadow: 0 0 15px rgba(255, 193, 7, 0.6); }
+            100% { text-shadow: 0 0 25px rgba(255, 193, 7, 0.9); }
         }
         
         .data-highlight::after {
@@ -368,6 +453,11 @@
             transform-style: preserve-3d;
             transform: translateZ(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.8s ease;
+        }
+        
+        .reform-img-container:hover {
+            transform: translateZ(20px) scale(1.03);
         }
         
         .reform-img {
@@ -405,6 +495,12 @@
             transform: translateZ(15px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
             position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .people-quote:hover {
+            transform: translateZ(25px) translateX(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
         }
         
         .people-quote::before {
@@ -474,6 +570,12 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
+            transition: all 0.5s ease;
+        }
+        
+        .chart-container:hover {
+            transform: translateZ(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         /* 新增数据看板样式 */
@@ -518,6 +620,13 @@
             right: 30px;
             z-index: 999;
             cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
         
         .back-to-top:hover {
@@ -583,6 +692,26 @@
             color: #ffc107;
             transform: translateZ(5px) translateY(-2px);
             text-decoration: none;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+        
+        /* 新增滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 20, 40, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ffc107, #ff8c00);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff8c00, #ffc107);
         }
         
         /* 响应式适配增强 */
@@ -705,7 +834,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-3d fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#home" style="color: #ffc107; transform: translateZ(10px);">
-                <i class="bi bi-flag-fill me-2"></i>十四五规划成果展示
+                <i class="bi bi-flag-fill me-2"></i>教师编备考 | 一战上岸
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -716,13 +845,13 @@
                         <a class="nav-link" href="#home">首页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wealth">财富馆</a>
+                        <a class="nav-link" href="#wealth">备考成果</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#reform">改革馆</a>
+                        <a class="nav-link" href="#reform">备考攻略</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#people">民生馆</a>
+                        <a class="nav-link" href="#people">备考心得</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#data-center">数据中心</a>
@@ -742,11 +871,11 @@
         <div class="carousel-inner">
             <!-- 科技工作者画面 -->
             <div class="carousel-item active">
-                <img src="https://q3.itc.cn/images01/20240508/849d10228e144baaab73de03bd84e8e1.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="科技工作者">
+                <img src="https://q3.itc.cn/images01/20240508/849d10228e144baaab73de03bd84e8e1.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="教师备考">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>拼搏奋发 一战上岸</h1>
-                    <p>广大科技工作者攻坚克难，为十四五规划提供坚实科技支撑</p>
-                    <a href="#wealth" class="btn btn-custom mt-4">查看财富成果</a>
+                    <p>精心备考，为教师编考试筑牢坚实基础</p>
+                    <a href="#wealth" class="btn btn-custom mt-4">查看备考成果</a>
                 </div>
             </div>
             <!-- 教育工作者画面 -->
@@ -754,17 +883,17 @@
                 <img src="https://images.pexels.com/photos/3747503/pexels-photo-3747503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="教育工作者">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>教育为本 人才强国</h1>
-                    <p>教育工作者辛勤耕耘，为国家发展培育栋梁之才</p>
-                    <a href="#wealth" class="btn btn-custom mt-4">查看财富成果</a>
+                    <p>成为优秀教育工作者，为国家发展培育栋梁之才</p>
+                    <a href="#wealth" class="btn btn-custom mt-4">查看备考成果</a>
                 </div>
             </div>
             <!-- 综合发展画面 -->
             <div class="carousel-item">
-                <img src="[https://images.pexels.com/photos/544269/pexels-photo-544269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2](https://q1.itc.cn/images01/20240508/73f9f47767944d2bb07f0486c227edee.jpeg)" class="d-block w-100" alt="十四五发展成果">
+                <img src="https://p3-sign.toutiaoimg.com/tos-cn-i-6w9my0ksvp/9423&x-signature=Hv2tlTaxRoYbhfNwhNbyddjhw%2F4%3D" class="d-block w-100" alt="上岸大湾区">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>上岸大湾区 拼在当下</h1>
-                    <p>经济发展、改革开放、民生改善取得历史性成就</p>
-                    <a href="#wealth" class="btn btn-custom mt-4">查看财富成果</a>
+                    <p>苏锡常、杭嘉甬、大湾区教师编备考全攻略</p>
+                    <a href="#wealth" class="btn btn-custom mt-4">查看备考成果</a>
                 </div>
             </div>
         </div>
@@ -778,7 +907,7 @@
         </button>
     </section>
 
-    <!-- 财富馆 -->
+    <!-- 备考成果馆 -->
     <section id="wealth" class="museum-section">
         <div class="container">
             <h2 class="museum-title">教师编 - 2026年一战上岸！</h2>
@@ -787,26 +916,26 @@
             <div class="row mb-5">
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter1">一</div>
+                        <div class="counter-number" id="counter1">1</div>
                         <div class="counter-label">苏锡常教师编(长三角)</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter2">战</div>
-                        <div class="counter-label">杭嘉甬</div>
+                        <div class="counter-number" id="counter2">100%</div>
+                        <div class="counter-label">杭嘉甬考点全覆盖</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter3">上</div>
-                        <div class="counter-label">广州深圳大湾区</div>
+                        <div class="counter-number" id="counter3">98</div>
+                        <div class="counter-label">广州深圳大湾区模拟分</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter4">岸</div>
-                        <div class="counter-label">拼在当下 博取未来</div>
+                        <div class="counter-number" id="counter4">4</div>
+                        <div class="counter-label">教育综合知识过轮数</div>
                     </div>
                 </div>
             </div>
@@ -815,10 +944,12 @@
                 <div class="col-lg-6">
                     <div class="content-card">
                         <h3 class="h4 mb-4 text-warning">备考成果</h3>
-                        <!-- 匹配内容的经济数据图片（开源） -->
-                        <img src="https://p3.itc.cn/q_70/images03/20210909/71294d5e57604ab78142b39e7e94c283.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="wealth-gif" alt="长三角经济数据展示">
-                        <p class="economic-data">教育综合知识已过掉<span class="data-highlight">4轮</span>，超过发达国家韩国（约24万亿元），成为中国经济发展的重要引擎。</p>
-                        <p class="economic-data">2024年长三角地区GDP增速达到<span class="data-highlight">5.8%</span>，高于全国平均水平，展现出强劲的发展韧性。</p>
+                        <!-- 备考学习GIF动图 -->
+                        <div class="gif-container">
+                            <img src="https://cdn.pixabay.com/animation/2023/06/10/10/39/10-39-24-985_512.gif" alt="备考学习动图">
+                        </div>
+                        <p class="economic-data">教育综合知识已过掉<span class="data-highlight">4轮</span>，知识点掌握率达到95%以上，远超平均备考水平。</p>
+                        <p class="economic-data">2024-2025备考周期内，模拟考试平均分达到<span class="data-highlight">92分</span>，较初始阶段提升40%。</p>
                         <!-- 交互数据图表 -->
                         <div class="chart-container">
                             <canvas id="yangtzeChart"></canvas>
@@ -827,12 +958,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="content-card">
-                        <h3 class="h4 mb-4 text-warning">全国民生经济数据</h3>
-                        <img src="https://images.pexels.com/photos/548307/pexels-photo-548307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="wealth-gif" alt="民生经济数据展示">
-                        <p class="economic-data">全国居民人均可支配收入达到<span class="data-highlight">49283元</span>，较2020年增长<span class="data-highlight">42.3%</span>。</p>
-                        <p class="economic-data">城镇新增就业连续五年超过<span class="data-highlight">1100万人</span>，就业形势保持稳定。</p>
-                        <p class="economic-data">全国居民消费价格指数（CPI）保持在<span class="data-highlight">2%左右</span>的温和区间，物价水平总体稳定。</p>
-                        <p class="economic-data">脱贫攻坚成果持续巩固，全国农村贫困人口全部脱贫，贫困地区居民收入增速持续高于全国平均水平。</p>
+                        <h3 class="h4 mb-4 text-warning">备考进度数据</h3>
+                        <!-- 时间规划GIF动图 -->
+                        <div class="gif-container">
+                            <img src="https://cdn.pixabay.com/animation/2023/07/10/12/59/12-59-27-888_512.gif" alt="时间规划动图">
+                        </div>
+                        <p class="economic-data">每日有效学习时长达到<span class="data-highlight">8小时</span>，周末加练2小时，累计学习时长超1200小时。</p>
+                        <p class="economic-data">刷题量突破<span class="data-highlight">11000道</span>，错题率从初始45%降至当前8%。</p>
+                        <p class="economic-data">主观题答题完整率保持在<span class="data-highlight">95%以上</span>，答题规范度持续提升。</p>
+                        <p class="economic-data">面试模拟练习累计<span class="data-highlight">50次</span>，表达流畅度和逻辑性显著提高。</p>
                         <!-- 交互数据图表 -->
                         <div class="chart-container">
                             <canvas id="peopleEconomyChart"></canvas>
@@ -843,42 +977,41 @@
         </div>
     </section>
 
-    <!-- 改革馆 -->
+    <!-- 备考攻略馆 -->
     <section id="reform" class="museum-section">
         <div class="container">
-            <h2 class="museum-title">改革馆 - 改革开放新成就</h2>
+            <h2 class="museum-title">备考攻略 - 高效备考新方法</h2>
             <div class="row">
-                <!-- 海南岛封关运作 -->
+                <!-- 考点分析 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="content-card h-100">
-                        <h3 class="h4 mb-4 text-warning">海南岛封关运作</h3>
+                        <h3 class="h4 mb-4 text-warning">考点精准分析</h3>
                         <div class="reform-img-container">
-                            <img src="https://images.pexels.com/photos/1450358/pexels-photo-1450358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="海南岛封关运作">
+                            <img src="https://images.pexels.com/photos/1450358/pexels-photo-1450358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="考点分析">
                         </div>
-                        <p>海南自由贸易港封关运作准备工作全面完成，实现"一线放开、二线管住"的监管模式，成为中国对外开放的新高地。</p>
+                        <p>对苏锡常、杭嘉甬、大湾区三地近5年真题进行深度分析，提炼高频考点86个，精准覆盖考试范围98%以上。</p>
                         <button class="btn btn-custom mt-3" onclick="showDetail('hainan')">查看详情</button>
                     </div>
                 </div>
-                <!-- 无人机送外卖 -->
+                <!-- 智能刷题 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="content-card h-100">
-                        <h3 class="h4 mb-4 text-warning">无人机送外卖</h3>
+                        <h3 class="h4 mb-4 text-warning">智能刷题系统</h3>
                         <div class="reform-img-container">
-                            <img src="https://images.pexels.com/photos/130879/pexels-photo-130879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="无人机送外卖">
+                            <img src="https://images.pexels.com/photos/130879/pexels-photo-130879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="智能刷题">
                         </div>
-                        <p>无人机配送服务在全国多个城市落地应用，覆盖外卖、快递等多个领域，配送效率提升30%以上，降低人力成本约40%。</p>
+                        <p>使用AI智能刷题系统，根据错题自动生成个性化练习计划，刷题效率提升30%以上，错题复现率降低40%。</p>
                         <button class="btn btn-custom mt-3" onclick="showDetail('drone')">查看详情</button>
                     </div>
                 </div>
-                <!-- 无人驾驶与机器人 -->
+                <!-- 模拟面试 -->
                 <div class="col-lg-4 col-md-12">
                     <div class="content-card h-100">
-                        <h3 class="h4 mb-4 text-warning">智能科技应用</h3>
+                        <h3 class="h4 mb-4 text-warning">全真模拟面试</h3>
                         <div class="reform-img-container">
-                            <img src="https://images.pexels.com/photos/1818604/pexels-photo-1818604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="无人驾驶与春晚机器人">
+                            <img src="https://images.pexels.com/photos/1818604/pexels-photo-1818604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="reform-img" alt="模拟面试">
                         </div>
-                        <p>"萝卜快跑"无人驾驶服务已在全国10余个城市商业化运营，累计安全行驶里程突破800万公里。</p>
-                        <p>春晚智能机器人展现中国人工智能技术的领先水平，涵盖服务、工业、特种等多个领域的机器人技术实现突破。</p>
+                        <p>采用AI面试评分系统+真人考官双模式，累计模拟面试50场，涵盖结构化、试讲、答辩全流程，评分准确率达90%以上。</p>
                         <button class="btn btn-custom mt-3" onclick="showDetail('ai')">查看详情</button>
                     </div>
                 </div>
@@ -886,43 +1019,44 @@
         </div>
     </section>
 
-    <!-- 民生馆 -->
+    <!-- 备考心得馆 -->
     <section id="people" class="museum-section">
         <div class="container">
-            <h2 class="museum-title">民生馆 - 群众观点与群众路线</h2>
+            <h2 class="museum-title">备考心得 - 坚持与努力同行</h2>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="content-card">
-                        <h3 class="h4 mb-4 text-center text-warning">坚持以人民为中心的发展思想</h3>
+                        <h3 class="h4 mb-4 text-center text-warning">坚持以目标为导向的备考理念</h3>
+                        <!-- 励志GIF动图 -->
+                        <div class="gif-container">
+                            <img src="https://cdn.pixabay.com/animation/2023/08/06/07/05/07-05-44-628_512.gif" alt="励志动图">
+                        </div>
                         <p class="people-content">
-                            十四五规划始终坚持群众观点和群众路线，把实现好、维护好、发展好最广大人民根本利益作为发展的出发点和落脚点。通过一系列民生保障政策，不断满足人民日益增长的美好生活需要，让发展成果更多更公平惠及全体人民。
+                            备考教师编的过程，是一场与自己的较量。我始终坚持每天8小时的有效学习时间，严格执行学习计划，把实现上岸目标作为一切行动的出发点和落脚点。通过系统化的知识点梳理、高强度的刷题训练、常态化的模拟面试，不断提升自己的综合应试能力。
                         </p>
                         <p class="people-content">
-                            在教育方面，全面落实"双减"政策，推进义务教育优质均衡发展，全国普惠性幼儿园覆盖率达到90.8%，九年义务教育巩固率保持在95%以上。在医疗方面，基本医疗保险参保率稳定在95%以上，国家医保药品目录动态调整，新增407种药品纳入医保报销范围。
+                            在学习方法上，我注重"理解+记忆+应用"三位一体，不仅掌握知识点本身，更注重知识点之间的关联和实际教学场景中的应用。通过错题本、思维导图、口诀记忆等多种方式，让抽象的教育理论变得具体可感，记忆效率提升60%以上。
                         </p>
                         <p class="people-quote">
-                            "江山就是人民，人民就是江山。我们党始终与人民心连心、同呼吸、共命运，始终把人民对美好生活的向往作为奋斗目标。"
+                            "每一次的坚持都不会白费，每一滴的汗水都将浇灌出成功的花朵。上岸不是终点，而是成为优秀教育工作者的新起点。"
                         </p>
                         <p class="people-content">
-                            在社会保障方面，基本养老保险参保人数达到10.5亿人，实现养老保险全国统筹，退休人员基本养老金连续19年上调。保障性住房建设加快推进，累计建设各类保障性住房和棚改安置住房超过5000万套，帮助近2亿群众实现"安居梦"。
+                            备考过程中，我也注重心态的调整和压力的释放。每天保证1小时的运动时间，定期与备考伙伴交流心得，保持积极向上的备考状态。相信只要坚持正确的方法，付出足够的努力，2026年一战上岸的目标一定能够实现。
                         </p>
-                        <p class="people-content">
-                            坚持群众路线，深入开展"我为群众办实事"实践活动，建立健全党员干部联系服务群众机制，解决群众急难愁盼问题超过1200万件，群众满意度持续提升，获得感、幸福感、安全感更加充实、更有保障、更可持续。
-                        </p>
-                        <button class="btn btn-custom mt-4 d-block mx-auto" onclick="showPeopleData()">查看民生数据详情</button>
+                        <button class="btn btn-custom mt-4 d-block mx-auto" onclick="showPeopleData()">查看备考数据详情</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 新增：数据中心 -->
+    <!-- 数据中心 -->
     <section id="data-center" class="museum-section">
         <div class="container">
-            <h2 class="museum-title">数据中心 - 可视化成果看板</h2>
+            <h2 class="museum-title">数据中心 - 备考成果可视化看板</h2>
             
             <div class="data-dashboard">
-                <h3 class="dashboard-title">十四五核心指标完成情况</h3>
+                <h3 class="dashboard-title">备考核心指标完成情况</h3>
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="chart-container">
@@ -945,7 +1079,7 @@
                 </div>
                 
                 <div class="text-center mt-4">
-                    <button class="btn btn-custom" onclick="exportData()">导出数据报告</button>
+                    <button class="btn btn-custom" onclick="exportData()">导出备考报告</button>
                 </div>
             </div>
         </div>
@@ -975,16 +1109,16 @@
             <div class="row mb-5">
                 <div class="col-lg-12 text-center footer-links">
                     <a href="#home"><i class="bi bi-house-door-fill me-1"></i>首页</a>
-                    <a href="#wealth"><i class="bi bi-graph-up me-1"></i>财富馆</a>
-                    <a href="#reform"><i class="bi bi-lightbulb-fill me-1"></i>改革馆</a>
-                    <a href="#people"><i class="bi bi-people-fill me-1"></i>民生馆</a>
+                    <a href="#wealth"><i class="bi bi-graph-up me-1"></i>备考成果</a>
+                    <a href="#reform"><i class="bi bi-lightbulb-fill me-1"></i>备考攻略</a>
+                    <a href="#people"><i class="bi bi-people-fill me-1"></i>备考心得</a>
                     <a href="#data-center"><i class="bi bi-database-fill me-1"></i>数据中心</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <p class="mb-4">© 2025 十四五规划成果展示平台 版权所有</p>
-                    <p>坚持以人民为中心 · 推动高质量发展 · 全面建设社会主义现代化国家</p>
+                    <p class="mb-4">© 2025 教师编备考平台 版权所有</p>
+                    <p>坚持以目标为导向 · 推动高效备考 · 全力实现一战上岸</p>
                 </div>
             </div>
         </div>
@@ -1019,12 +1153,13 @@
             
             particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
             
-            // 粒子材质
+            // 粒子材质 - 新增颜色渐变
             const particlesMaterial = new THREE.PointsMaterial({
                 size: 0.02,
                 color: 0xffc107,
                 transparent: true,
-                opacity: 0.6
+                opacity: 0.6,
+                sizeAttenuation: true
             });
             
             const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -1032,7 +1167,7 @@
             
             camera.position.z = 3;
             
-            // 动画循环
+            // 动画循环 - 新增鼠标交互
             function animate() {
                 requestAnimationFrame(animate);
                 particlesMesh.rotation.x += 0.0005;
@@ -1050,17 +1185,17 @@
             });
         }
         
-        // 鼠标交互3D背景
+        // 鼠标交互3D背景 - 增强灵敏度
         document.addEventListener('mousemove', function(e) {
             const bg = document.querySelector('.bg-3d');
             if (bg) {
                 const x = e.clientX / window.innerWidth - 0.5;
                 const y = e.clientY / window.innerHeight - 0.5;
-                bg.style.transform = `rotateX(${y * 8}deg) rotateY(${x * 8}deg) translateZ(-50px)`;
+                bg.style.transform = `rotateX(${y * 10}deg) rotateY(${x * 10}deg) translateZ(-50px)`;
             }
         });
 
-        // 数字滚动效果
+        // 数字滚动效果 - 修复数值匹配
         function initCounters() {
             const options = {
                 duration: 3,
@@ -1070,10 +1205,10 @@
                 decimal: '.',
             };
             
-            const counter1 = new countUp.CountUp('counter1', 29, options);
-            const counter2 = new countUp.CountUp('counter2', 49283, options);
-            const counter3 = new countUp.CountUp('counter3', 1100, options);
-            const counter4 = new countUp.CountUp('counter4', 9899, options);
+            const counter1 = new countUp.CountUp('counter1', 1, options);
+            const counter2 = new countUp.CountUp('counter2', 100, { ...options, suffix: '%' });
+            const counter3 = new countUp.CountUp('counter3', 98, options);
+            const counter4 = new countUp.CountUp('counter4', 4, options);
             
             // 滚动到财富馆时触发数字滚动
             const observer = new IntersectionObserver((entries) => {
@@ -1091,23 +1226,37 @@
             observer.observe(document.getElementById('wealth'));
         }
 
-        // 长三角经济数据图表
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-3d');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.add('visible');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // 备考进度图表
         const yangtzeCtx = document.getElementById('yangtzeChart')?.getContext('2d');
         if (yangtzeCtx) {
             new Chart(yangtzeCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    labels: ['第一轮', '第二轮', '第三轮', '第四轮'],
                     datasets: [{
-                        label: '长三角GDP总量(万亿元)',
-                        data: [23.7, 25.6, 27.1, 28.3, 29.0],
+                        label: '知识点掌握率(%)',
+                        data: [65, 78, 88, 95],
                         backgroundColor: 'rgba(255, 193, 7, 0.7)',
                         borderColor: 'rgba(255, 193, 7, 1)',
                         borderWidth: 1,
                         borderRadius: 8
                     }, {
-                        label: '韩国GDP总量(万亿元)',
-                        data: [20.5, 21.8, 22.5, 23.2, 24.0],
+                        label: '答题正确率(%)',
+                        data: [55, 70, 82, 90],
                         backgroundColor: 'rgba(108, 117, 125, 0.7)',
                         borderColor: 'rgba(108, 117, 125, 1)',
                         borderWidth: 1,
@@ -1125,7 +1274,7 @@
                         },
                         title: {
                             display: true,
-                            text: '长三角VS韩国GDP对比',
+                            text: '备考四轮知识点掌握情况',
                             color: '#ffc107',
                             font: { size: 18, weight: 'bold' }
                         },
@@ -1142,6 +1291,7 @@
                     scales: {
                         y: {
                             beginAtZero: true,
+                            max: 100,
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
@@ -1168,16 +1318,16 @@
             });
         }
 
-        // 民生经济数据图表
+        // 学习时长图表
         const peopleCtx = document.getElementById('peopleEconomyChart')?.getContext('2d');
         if (peopleCtx) {
             new Chart(peopleCtx, {
                 type: 'line',
                 data: {
-                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    labels: ['1月', '2月', '3月', '4月', '5月'],
                     datasets: [{
-                        label: '居民人均可支配收入(元)',
-                        data: [32189, 35128, 36883, 42833, 49283],
+                        label: '月均学习时长(小时)',
+                        data: [180, 200, 220, 240, 260],
                         fill: true,
                         backgroundColor: 'rgba(255, 193, 7, 0.2)',
                         borderColor: 'rgba(255, 193, 7, 1)',
@@ -1186,8 +1336,8 @@
                         pointRadius: 6,
                         pointHoverRadius: 8
                     }, {
-                        label: 'CPI指数(%)',
-                        data: [2.5, 0.9, 2.0, 2.1, 2.0],
+                        label: '错题率(%)',
+                        data: [45, 35, 20, 12, 8],
                         fill: false,
                         borderColor: 'rgba(0, 191, 255, 1)',
                         tension: 0.4,
@@ -1207,7 +1357,7 @@
                         },
                         title: {
                             display: true,
-                            text: '民生经济数据趋势',
+                            text: '备考时长与错题率趋势',
                             color: '#ffc107',
                             font: { size: 18, weight: 'bold' }
                         },
@@ -1249,13 +1399,13 @@
             });
         }
 
-        // 新增：完成率图表
+        // 完成率图表
         const completionCtx = document.getElementById('completionChart')?.getContext('2d');
         if (completionCtx) {
             new Chart(completionCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['经济增长', '就业保障', '科技创新', '民生改善', '绿色发展', '改革开放'],
+                    labels: ['知识点掌握', '刷题量', '模拟考试', '面试练习', '错题复盘', '计划执行'],
                     datasets: [{
                         label: '目标值',
                         data: [100, 100, 100, 100, 100, 100],
@@ -1265,7 +1415,7 @@
                         pointRadius: 5
                     }, {
                         label: '完成值',
-                        data: [105, 112, 120, 108, 115, 110],
+                        data: [95, 110, 98, 85, 120, 92],
                         backgroundColor: 'rgba(255, 193, 7, 0.2)',
                         borderColor: 'rgba(255, 193, 7, 0.8)',
                         pointBackgroundColor: '#ffc107',
@@ -1280,7 +1430,7 @@
                         },
                         title: {
                             display: true,
-                            text: '核心指标完成率',
+                            text: '备考核心指标完成率',
                             color: '#ffc107',
                             font: { size: 16, weight: 'bold' }
                         }
@@ -1301,20 +1451,21 @@
             });
         }
 
-        // 新增：产业结构图表
+        // 备考模块占比图表
         const sectorCtx = document.getElementById('sectorChart')?.getContext('2d');
         if (sectorCtx) {
             new Chart(sectorCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['第一产业', '第二产业', '第三产业', '数字经济'],
+                    labels: ['教育综合知识', '专业学科知识', '面试准备', '模拟练习', '错题复盘'],
                     datasets: [{
-                        data: [7.3, 39.4, 48.8, 4.5],
+                        data: [35, 30, 15, 12, 8],
                         backgroundColor: [
-                            'rgba(40, 167, 69, 0.7)',
-                            'rgba(0, 123, 255, 0.7)',
                             'rgba(255, 193, 7, 0.7)',
-                            'rgba(220, 53, 69, 0.7)'
+                            'rgba(0, 123, 255, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(220, 53, 69, 0.7)',
+                            'rgba(108, 117, 125, 0.7)'
                         ],
                         borderColor: 'rgba(0, 20, 40, 0.8)',
                         borderWidth: 2
@@ -1329,7 +1480,7 @@
                         },
                         title: {
                             display: true,
-                            text: '产业结构占比',
+                            text: '备考时间分配占比',
                             color: '#ffc107',
                             font: { size: 16, weight: 'bold' }
                         },
@@ -1350,124 +1501,15 @@
             });
         }
 
-        // 新增：增长趋势图表
+        // 增长趋势图表
         const growthCtx = document.getElementById('growthChart')?.getContext('2d');
         if (growthCtx) {
             new Chart(growthCtx, {
                 type: 'line',
                 data: {
-                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    labels: ['1月', '2月', '3月', '4月', '5月'],
                     datasets: [{
-                        label: 'GDP增长率(%)',
-                        data: [2.3, 8.1, 3.0, 5.2, 5.8],
+                        label: '模拟考试分数',
+                        data: [65, 72, 80, 88, 92],
                         borderColor: '#ffc107',
-                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }, {
-                        label: '人均可支配收入增长率(%)',
-                        data: [4.7, 9.1, 5.0, 6.3, 7.1],
-                        borderColor: '#00bfff',
-                        backgroundColor: 'rgba(0, 191, 255, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }, {
-                        label: '固定资产投资增长率(%)',
-                        data: [2.9, 4.9, 5.1, 4.5, 4.8],
-                        borderColor: '#28a745',
-                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            labels: { color: '#fff' }
-                        },
-                        title: {
-                            display: true,
-                            text: '关键指标增长趋势',
-                            color: '#ffc107',
-                            font: { size: 16, weight: 'bold' }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            ticks: { color: '#e0e0e0' }
-                        },
-                        x: {
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            ticks: { color: '#e0e0e0' }
-                        }
-                    }
-                }
-            });
-        }
-
-        // 详情展示函数
-        function showDetail(type) {
-            const modalTitle = document.getElementById('detailModalLabel');
-            const modalContent = document.getElementById('modalContent');
-            const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-
-            switch(type) {
-                case 'hainan':
-                    modalTitle.textContent = '海南岛封关运作详情';
-                    modalContent.innerHTML = `
-                        <img src="https://images.pexels.com/photos/1450358/pexels-photo-1450358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="img-fluid rounded mb-3" alt="海南封关">
-                        <p class="lead">海南自由贸易港封关运作于2025年正式实施，这是中国对外开放的重大举措。</p>
-                        <ul class="list-group list-group-flush bg-transparent">
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 全岛封关运作，实现"一线放开、二线管住"的监管模式</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 零关税政策覆盖99%以上商品，打造国际消费中心</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 累计注册市场主体超300万户，年均增长30%以上</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 2024年海南GDP突破8000亿元，增速达9.2%</li>
-                        </ul>
-                    `;
-                    break;
-                case 'drone':
-                    modalTitle.textContent = '无人机配送发展详情';
-                    modalContent.innerHTML = `
-                        <img src="https://images.pexels.com/photos/130879/pexels-photo-130879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="img-fluid rounded mb-3" alt="无人机配送">
-                        <p class="lead">无人机配送已成为智慧城市建设的重要组成部分，改变传统物流模式。</p>
-                        <ul class="list-group list-group-flush bg-transparent">
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 全国已建成无人机配送航线超1000条，覆盖50余个城市</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 配送效率提升30%以上，人力成本降低约40%</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 单架无人机日均配送量达200单，覆盖半径15公里</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 2024年无人机配送市场规模突破200亿元</li>
-                        </ul>
-                    `;
-                    break;
-                case 'ai':
-                    modalTitle.textContent = '智能科技应用详情';
-                    modalContent.innerHTML = `
-                        <img src="https://images.pexels.com/photos/1818604/pexels-photo-1818604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="img-fluid rounded mb-3" alt="智能科技">
-                        <p class="lead">中国智能科技发展走在世界前列，无人驾驶和机器人技术成果显著。</p>
-                        <ul class="list-group list-group-flush bg-transparent">
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ "萝卜快跑"无人驾驶服务覆盖15个城市，累计行驶800万公里</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 春晚机器人涵盖服务、工业、特种等10余个品类，技术全球领先</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 2024年中国人工智能核心产业规模突破5000亿元</li>
-                            <li class="list-group-item bg-transparent border-warning border-opacity-25">✓ 智能机器人年产量突破100万台，国产化率达85%</li>
-                        </ul>
-                    `;
-                    break;
-            }
-            
-            modal.show();
-        }
-
-        // 民生数据详情展示
-        function showPeopleData() {
-            const modalTitle = document.getElementById('detailModalLabel');
-            const modalContent = document.getElementById('modalContent');
-            const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-
-            modalTitle.textContent = '民生发展详细数据';
-            modalContent.innerHTML = `
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="text-warning mb-3">教育事业</h5>
-                        <ul class="list-group list-group-flush bg-transparent">
-                            <li class="list-group-item bg-transparent">普惠性幼儿园覆盖率：90.8%</li>
+                        backgroundColor: 'rgba(25

@@ -781,7 +781,7 @@
     <!-- 财富馆 -->
     <section id="wealth" class="museum-section">
         <div class="container">
-            <h2 class="museum-title">财富馆 - 经济发展成果</h2>
+            <h2 class="museum-title">教师编 - 2026年一战上岸！</h2>
             
             <!-- 数字看板 -->
             <div class="row mb-5">
@@ -794,19 +794,19 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
                         <div class="counter-number" id="counter2">0</div>
-                        <div class="counter-label">人均可支配收入(元)</div>
+                        <div class="counter-label">杭嘉甬</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
                         <div class="counter-number" id="counter3">0</div>
-                        <div class="counter-label">城镇新增就业(万人)</div>
+                        <div class="counter-label">广州深圳大湾区</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
                         <div class="counter-number" id="counter4">0</div>
-                        <div class="counter-label">脱贫人口(万人)</div>
+                        <div class="counter-label">拼在当下 博取未来</div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-# 袁心悦老师爱岗敬业，甘为铺路石、勇当大先生
+# 爱岗敬业，甘为铺路石、勇当大先生
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -787,25 +787,25 @@
             <div class="row mb-5">
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter1">0</div>
+                        <div class="counter-number" id="counter1">一</div>
                         <div class="counter-label">苏锡常教师编(长三角)</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter2">0</div>
+                        <div class="counter-number" id="counter2">战</div>
                         <div class="counter-label">杭嘉甬</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter3">0</div>
+                        <div class="counter-number" id="counter3">上</div>
                         <div class="counter-label">广州深圳大湾区</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
-                        <div class="counter-number" id="counter4">0</div>
+                        <div class="counter-number" id="counter4">岸</div>
                         <div class="counter-label">拼在当下 博取未来</div>
                     </div>
                 </div>
@@ -814,10 +814,10 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="content-card">
-                        <h3 class="h4 mb-4 text-warning">长三角经济发展成果</h3>
+                        <h3 class="h4 mb-4 text-warning">备考成果</h3>
                         <!-- 匹配内容的经济数据图片（开源） -->
-                        <img src="https://images.pexels.com/photos/164688/pexels-photo-164688.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="wealth-gif" alt="长三角经济数据展示">
-                        <p class="economic-data">长三角地区经济体量已突破<span class="data-highlight">29万亿元</span>，超过发达国家韩国（约24万亿元），成为中国经济发展的重要引擎。</p>
+                        <img src="https://p3.itc.cn/q_70/images03/20210909/71294d5e57604ab78142b39e7e94c283.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="wealth-gif" alt="长三角经济数据展示">
+                        <p class="economic-data">教育综合知识已过掉<span class="data-highlight">4轮</span>，超过发达国家韩国（约24万亿元），成为中国经济发展的重要引擎。</p>
                         <p class="economic-data">2024年长三角地区GDP增速达到<span class="data-highlight">5.8%</span>，高于全国平均水平，展现出强劲的发展韧性。</p>
                         <!-- 交互数据图表 -->
                         <div class="chart-container">

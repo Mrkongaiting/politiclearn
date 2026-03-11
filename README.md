@@ -744,7 +744,7 @@
             <div class="carousel-item active">
                 <img src="https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="科技工作者">
                 <div class="carousel-caption d-none d-md-block">
-                    <h1>科技引领 创新发展</h1>
+                    <h1>拼搏奋发 一战上岸</h1>
                     <p>广大科技工作者攻坚克难，为十四五规划提供坚实科技支撑</p>
                     <a href="#wealth" class="btn btn-custom mt-4">查看财富成果</a>
                 </div>
@@ -762,7 +762,7 @@
             <div class="carousel-item">
                 <img src="https://images.pexels.com/photos/544269/pexels-photo-544269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="十四五发展成果">
                 <div class="carousel-caption d-none d-md-block">
-                    <h1>十四五规划 成果斐然</h1>
+                    <h1>上岸大湾区 拼在当下</h1>
                     <p>经济发展、改革开放、民生改善取得历史性成就</p>
                     <a href="#wealth" class="btn btn-custom mt-4">查看财富成果</a>
                 </div>
@@ -788,7 +788,7 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="counter-box">
                         <div class="counter-number" id="counter1">0</div>
-                        <div class="counter-label">长三角GDP(万亿元)</div>
+                        <div class="counter-label">苏锡常教师编(长三角)</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
